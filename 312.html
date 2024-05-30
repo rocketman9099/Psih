@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ментальная поддержка</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f0f8ff; }
+        .container { width: 80%; margin: auto; padding: 20px; }
+        .header { text-align: center; padding: 50px; }
+        .nav { text-align: center; margin-top: 20px; }
+        .nav a { margin: 0 15px; text-decoration: none; color: #007BFF; }
+        .content { display: none; }
+        .active { display: block; }
+        .chat-box { border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: scroll; background-color: #fff; }
+        .input-box { margin-top: 20px; }
+        .input-box input { width: 80%; padding: 10px; }
+        .input-box button { padding: 10px 20px; }
+        .exercise, .resource { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; background-color: #fff; }
+    </style>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Добро пожаловать в приложение ментальной поддержки</h1>
+            <p>Здесь вы найдете ресурсы и поддержку для борьбы с зависимостями.</p>
+        </div>
+        <div class="nav">
+            <a href="#main" onclick="showPage('main')">Главная</a>
+            <a href="#support" onclick="showPage('support')">Поддержка</a>
+            <a href="#resources" onclick="showPage('resources')">Ресурсы</a>
+            <a href="#chat" onclick="showPage('chat')">Чат с консультантом</a>
+        </div>
+        <div id="main" class="content active">
+            <h2>Главная страница</h2>
+            <p>Добро пожаловать в приложение ментальной поддержки. Здесь вы найдете ресурсы и поддержку для борьбы с зависимостями.</p>
+        </div>
+        <div id="support" class="content">
+            <h2>Поддержка</h2>
+            <div class="exercise">
+                <h3>Дыхательные упражнения</h3>
+                <p>Сделайте глубокий вдох через нос, задержите дыхание на несколько секунд, затем медленно выдохните через рот.</p>
+            </div>
+            <div class="exercise">
+                <h3>Медитация</h3>
+                <p>Найдите тихое место, сядьте удобно, закройте глаза и сосредоточьтесь на своем дыхании. Постарайтесь очистить свой разум от посторонних мыслей.</p>
+            </div>
+        </div>
+        <div id="resources" class="content">
+            <h2>Ресурсы</h2>
+            <div class="resource">
+                <h3>Статья: Как справиться с зависимостью</h3>
+                <p>Эта статья содержит полезные советы и методы для борьбы с зависимостью. <a href="https://example.com/article1">Читать далее</a></p>
+            </div>
+            <div class="resource">
+                <h3>Организация: Анонимные Алкоголики</h3>
+                <p>Анонимные Алкоголики предоставляют поддержку и ресурсы для людей, страдающих алкоголизмом. <a href="https://example.com/aa">Посетить сайт</a></p>
+            </div>
+        </div>
+        <div id="chat" class="content">
+            <h2>Чат с консультантом</h2>
+            <div class="chat-box" id="chat-box">
+                <!-- История сообщений будет здесь -->
+            </div>
+            <div class="input-box">
+                <input type="text" id="message-input" placeholder="Введите ваше сообщение...">
+                <button onclick="sendMessage()">Отправить</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        Telegram.WebApp.ready();
+
+        function showPage(pageId) {
+            var pages = document.querySelectorAll('.content');
+            pages.forEach(function(page) {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        function sendMessage() {
+            var input = document.getElementById('message-input');
+            var message = input.value;
+            if (message) {
+                var chatBox = document.getElementById('chat-box');
+                var newMessage = document.createElement('div');
+                newMessage.textContent = 'Вы: ' + message;
+                chatBox.appendChild(newMessage);
+                input.value = '';
+
+                // Отправка сообщения обратно боту
+                Telegram.WebApp.sendData(message);
+            }
+        }
+    </script>
+</body>
+</html>
