@@ -64,7 +64,7 @@
                 <!-- История сообщений будет здесь -->
             </div>
             <div class="input-box">
-                <input type="text" id="message-input" placeholder="Введите ваше сообщение...">
+                <input type="text" id="message-input" placeholder="Введите ваше сообщение..." onkeydown="if (event.key === 'Enter') sendMessage()">
                 <button onclick="sendMessage()">Отправить</button>
             </div>
         </div>
@@ -104,14 +104,20 @@
             return result;
         }
 
-        function updateBotReply(message) {
-            var chatBox = document.getElementById('chat-box');
-            var botReply = document.createElement('div');
-            botReply.textContent = 'Бот: ' + message;
-            chatBox.appendChild(botReply);
+        function updateBotReply(response) {
+            try {
+                const data = JSON.parse(response);
+                const message = data.text ? `Анжела: ${data.text}` : `Бот: ${response}`;
+                var chatBox = document.getElementById('chat-box');
+                var botReply = document.createElement('div');
+                botReply.textContent = message;
+                chatBox.appendChild(botReply);
 
-            // Прокрутка чата вниз
-            chatBox.scrollTop = chatBox.scrollHeight;
+                // Прокрутка чата вниз
+                chatBox.scrollTop = chatBox.scrollHeight;
+            } catch (error) {
+                console.error("Ошибка при обработке ответа: ", error);
+            }
         }
 
         async function sendMessage() {
