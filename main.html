@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ментальная поддержка</title>
     <style>
+        /* Ваши текущие стили */
         body {
             font-family: 'Arial', sans-serif;
             background-color: #e0f7fa;
@@ -19,11 +20,11 @@
         }
         .container {
             width: 100%;
-            max-width: 400px;
-            margin: auto;
+            max-width: none;
+            margin: 0;
             background-color: #ffffff;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            border-radius: 16px;
+            box-shadow: none;
+            border-radius: 0;
             display: flex;
             flex-direction: column;
             height: 100%;
@@ -50,96 +51,66 @@
             background: radial-gradient(circle, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0.7) 100%);
         }
         .header {
-            text-align: center;
+            text-align: left;
             padding: 20px 10px;
             background-color: #007BFF;
             color: #fff;
-            border-top-left-radius: 16px;
-            border-top-right-radius: 16px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        .header .avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: url('https://cdn.midjourney.com/2b20a3c8-bdef-466f-80bb-1888b960a420/0_2.png') no-repeat center center;
-            background-size: cover;
-            margin-right: 10px;
-        }
-        .header h1 {
-            font-size: 1.5em;
-            margin: 0;
-            flex: 1;
-        }
-        .chat-box {
-            flex: 1;
-            border: 1px solid #ccc;
-            padding: 10px;
-            overflow-y: auto;
-            background-color: #f9f9f9;
-            border-radius: 16px;
-            margin: 10px;
-            display: flex;
-            flex-direction: column;
-        }
-        .chat-box::-webkit-scrollbar {
-            display: none;
-        }
-        .input-box {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px;
-            background-color: #fff;
-            border-top: 1px solid #ccc;
-        }
-        .input-box input {
-            width: 75%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 16px;
-        }
-        .input-box button {
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: #fff;
-            border: none;
-            border-radius: 16px;
-            cursor: pointer;
-        }
-        .input-box button:hover {
-            background-color: #0056b3;
-        }
-        .nav-bar {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            padding: 10px;
-            background-color: #007BFF;
-            border-bottom-left-radius: 16px;
-            border-bottom-right-radius: 16px;
-            height: 14.17%;
             width: 100%;
             box-sizing: border-box;
+            border-radius: 0;
+            flex-shrink: 0;
         }
-        .nav-bar a {
+        .header h1 {
+            margin-left: 10px;
+            flex: 1;
+        }
+        .menu-button {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        .menu {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 123, 255, 0.95);
+            z-index: 10;
+            justify-content: center;
+        }
+        .menu a {
             color: #fff;
             text-decoration: none;
-            font-size: 1.2em;
-            padding: 10px 20px;
+            font-size: 1.5em;
+            padding: 15px 20px;
             border-radius: 16px;
             background-color: #0056b3;
             transition: background-color 0.3s;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            margin: 10px 0;
+            width: 80%;
+            text-align: center;
         }
-        .nav-bar a:hover {
+        .menu a:hover {
             background-color: #004494;
+        }
+        .menu-button-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2em;
+            cursor: pointer;
         }
         .content {
             display: none;
@@ -157,6 +128,7 @@
             margin-bottom: 10px;
             max-width: 70%;
             word-wrap: break-word;
+            font-size: 1em;
         }
         .message.user {
             background-color: #007BFF;
@@ -191,6 +163,49 @@
             font-size: 1.2em;
             z-index: 1;
         }
+        .main-button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        .main-button:hover {
+            background-color: #0056b3;
+        }
+        .input-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #fff;
+            border-top: 1px solid #ccc;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .input-box input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 16px;
+            font-size: 1em;
+            margin-right: 10px;
+        }
+        .input-box button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .input-box button:hover {
+            background-color: #0056b3;
+        }
         @media (max-width: 600px) {
             .header h1 {
                 font-size: 1.2em;
@@ -209,11 +224,19 @@
         <button class="main-button" onclick="startApp()">Начать чат</button>
     </div>
     <div class="container" id="app-container" style="display: none;">
+        <div class="header">
+            <div class="avatar"></div>
+            <h1>Чат с ассистентом</h1>
+            <button class="menu-button" onclick="toggleMenu()">☰</button>
+        </div>
+        <div class="menu" id="menu">
+            <button class="menu-button-close" onclick="toggleMenu()">✖</button>
+            <a href="#support" onclick="showPage('support'); toggleMenu();">Поддержка</a>
+            <a href="#resources" onclick="showPage('resources'); toggleMenu();">Ресурсы</a>
+            <a href="#chat" onclick="showPage('chat'); toggleMenu();">Чат</a>
+            <a href="#subscription" onclick="showPage('subscription'); toggleMenu();">Подписка</a>
+        </div>
         <div id="chat" class="content active">
-            <div class="header">
-                <div class="avatar"></div>
-                <h1>Чат с ассистентом</h1>
-            </div>
             <div class="chat-box" id="chat-box">
                 <!-- История сообщений будет здесь -->
             </div>
@@ -223,9 +246,7 @@
             </div>
         </div>
         <div id="support" class="content">
-            <div class="header">
-                <h1>Поддержка</h1>
-            </div>
+            <h1>Поддержка</h1>
             <div class="card">
                 <h3>Дыхательные упражнения</h3>
                 <p>Сделайте глубокий вдох через нос, задержите дыхание на несколько секунд, затем медленно выдохните через рот.</p>
@@ -236,9 +257,7 @@
             </div>
         </div>
         <div id="resources" class="content">
-            <div class="header">
-                <h1>Ресурсы</h1>
-            </div>
+            <h1>Ресурсы</h1>
             <div class="card">
                 <h3>Статья: Как справиться с зависимостью</h3>
                 <p>Эта статья содержит полезные советы и методы для борьбы с зависимостью. <a href="https://example.com/article1">Читать далее</a></p>
@@ -248,10 +267,13 @@
                 <p>Анонимные Алкоголики предоставляют поддержку и ресурсы для людей, страдающих алкоголизмом. <a href="https://example.com/aa">Посетить сайт</a></p>
             </div>
         </div>
-        <div class="nav-bar">
-            <a href="#support" onclick="showPage('support')">Поддержка</a>
-            <a href="#resources" onclick="showPage('resources')">Ресурсы</a>
-            <a href="#chat" onclick="showPage('chat')">Чат</a>
+        <div id="subscription" class="content">
+            <h1>Подписка</h1>
+            <div class="card">
+                <h3>Подписка на 30 дней</h3>
+                <p>Подписка на 30 дней включает доступ ко всем функциям и обновлениям.</p>
+                <button class="main-button" onclick="startPayment()">Купить</button>
+            </div>
         </div>
     </div>
     <script>
@@ -264,8 +286,21 @@
             var pages = document.querySelectorAll('.content');
             pages.forEach(function(page) {
                 page.classList.remove('active');
+                page.style.display = 'none';
             });
-            document.getElementById(pageId).classList.add('active');
+            var page = document.getElementById(pageId);
+            page.classList.add('active');
+            page.style.display = 'flex';
+            page.style.flexDirection = 'column';
+        }
+
+        function toggleMenu() {
+            var menu = document.getElementById('menu');
+            if (menu.style.display === 'none' || menu.style.display === '') {
+                menu.style.display = 'flex';
+            } else {
+                menu.style.display = 'none';
+            }
         }
 
         async function query(data) {
@@ -328,6 +363,23 @@
                     chatBox.scrollTop = chatBox.scrollHeight;
                 }
             }
+        }
+
+        function startPayment() {
+            const paymentData = {
+                chat_id: Telegram.WebApp.initDataUnsafe.user.id,
+                provider_token: 'YOUR_PROVIDER_TOKEN',
+                start_parameter: 'get_access',
+                title: 'Подписка на 30 дней',
+                description: 'Оплата подписки на 30 дней.',
+                currency: 'RUB',
+                prices: [
+                    { label: 'Подписка на 30 дней', amount: 10000 }  // Укажите сумму в копейках (10000 = 100.00 RUB)
+                ],
+                payload: 'subscription_payload',
+            };
+
+            Telegram.WebApp.openInvoice(paymentData);
         }
     </script>
 </body>
